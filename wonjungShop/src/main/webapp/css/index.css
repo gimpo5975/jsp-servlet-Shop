@@ -1,0 +1,246 @@
+@charset "UTF-8";
+/*글꼴 import*/
+@font-face {
+  font-family: "GmarketSansMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "GmarketSansMedium";
+}
+body {
+  margin: 0 auto;
+  background-color: #373f52;
+  width: 1400px;
+  height: 820px;
+}
+
+.container {
+  width: 1400px;
+  height: 820px;
+  background-color: #edf0f2;
+}
+
+/* 공통 코드 : a*/
+a {
+  color: black;
+  text-decoration: none;
+  display: block;
+}
+
+/*header*/
+.header {
+  font-family: "GmarketSansMedium";
+  font-weight: bold;
+  width: 1400px;
+  height: 80px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #272e3d;
+  align-items: center;
+}
+.header a {
+  color: white;
+}
+
+.header > h1,
+img {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.header > img {
+  width: 160px;
+  height: 80px;
+}
+
+.header > topNav {
+  text-decoration: none;
+  display: block;
+}
+
+.admin {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+.topNav {
+  margin-right: 25px;
+}
+
+.topNav li {
+  display: inline-block;
+}
+
+/*leftmain*/
+.leftmain {
+  font-family: "GmarketSansMedium";
+  font-weight: bold;
+  width: 150px;
+  height: 680px;
+  float: left;
+  text-align: center;
+  background-color: #272e3d;
+}
+
+.sideMenu {
+  margin: 0;
+  padding: 0;
+  width: 150px;
+}
+
+.sideMenu > li {
+  list-style: none;
+  padding: 0;
+  width: 150px;
+  text-align: center;
+  line-height: 40px;
+  background-color: #272e3d;
+  border: 0;
+}
+
+.sideMenu a {
+  color: white;
+}
+
+.userhr {
+  border-top: 1px solid #494e5a;
+}
+
+/* 아코디언 */
+
+.accordion-header {
+  background-color: #272e3d;
+  color: #fff;
+  padding: 15px;
+  cursor: pointer;
+}
+
+.accordion-content {
+  width: 120px;
+  border-radius: 5px;
+  display: none;
+  margin-left: 15px;
+  padding: 15px;
+  background-color: #151f37;
+
+}
+
+.accordion-content a {
+  color: gray;
+}
+/* 마우스 올렸을 때 반응! */
+.sideMenu .accordion-header:hover {
+  background-color: #ffd343;
+  transition: 0.7s;
+  color: #272e3d;
+}
+
+/*main*/
+.main {
+  margin: 0;
+  padding: 0;
+  width: 1250px;
+  height: 680px;
+  float: left;
+}
+/*maioncontent*/
+.maincontent {
+  width: 1150px;
+  height: 600px;
+  margin: 40px auto;
+}
+/*상품목록*/
+.mainh{
+  margin: 0;
+  padding: 0;
+  width: 1150px;
+  height: 30px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.mainh > h3 {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.mainh > h4 {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  background-color: #ffd343;
+  height: 30px;
+  line-height: 30px;
+}
+/*상품 등록*/
+/* .uploadCancle{
+  width: 100px;
+  height: 30px;
+} */
+
+/* .uploadCancle > h4 {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  border: 1px solid #ccc;
+  background-color: #ffd343;
+  margin-bottom: 1px;
+} */
+
+
+
+.maincontent>h3{
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.maincontent > hr {
+  border: 1px solid black;
+  margin-bottom: 10px;
+}
+
+.maincontent > .lasthr {
+  border: 1px solid black;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.maincontent > h4 {
+  font-weight: bold;
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  margin: 0;
+  padding: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 1px solid black;
+}
+
+/*footer*/
+.Footer {
+  text-align: center;
+  clear: both;
+  width: 1400px;
+  height: 60px;
+  line-height: 60px;
+  background-color: #fff;
+}
