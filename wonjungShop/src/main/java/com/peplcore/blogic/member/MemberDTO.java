@@ -1,5 +1,7 @@
 package com.peplcore.blogic.member;
 
+import java.util.Date;
+
 public class MemberDTO {
 
 	//field
@@ -14,7 +16,7 @@ public class MemberDTO {
 	private String role;
 	private String grade;
 	private String email;
-	private String date;
+	private Date date;
 	private String newsAgency;
 	private String countrySelect;
 	
@@ -79,10 +81,10 @@ public class MemberDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 	public String getNewsAgency() {

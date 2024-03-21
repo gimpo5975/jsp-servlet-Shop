@@ -1,0 +1,87 @@
+@charset "UTF-8";
+.maincontent{
+  width: 1150px;
+  height: 600px;
+  margin: 40px auto;
+}
+.maincontent>h3{
+    font-size: 1.3rem;
+}
+.memberInfoHr {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.memberCount {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.members {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f0f0f0;
+}
+
+.memberSituation {
+  font-weight: bold;
+  font-size: 22px;
+  color: #333;
+  width: 150px;
+  height: 50px;
+  border: 1px solid #ccc;
+  text-align: center;
+  line-height: 50px;
+}
+
+.count {
+  line-height: 50px;
+  text-align: center;
+  font-size: 22px;
+  color: #007bff;
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ccc;
+}
+
+/* Styling for member list */
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  width: 150px;
+  height: 30px;
+  line-height: 30px;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+td:nth-child(3), td:nth-child(4){
+    width: 250px;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+/* Styling for update and delete links */
+
+.updateDelete a {
+  color: #007bff;
+  text-decoration: none;
+margin: 4px auto; 
+  border: 1px solid #ccc;
+  width: 100px;
+  height: 33px;
+
+}
+
+.updateDelete a:hover {
+  text-decoration: underline;
+}

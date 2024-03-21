@@ -19,7 +19,7 @@
 
 			<div class="col-sm-6">
 				<form class="form-horizontal" id="form1"
-					action="MemberLoginProc.jsp" method="post">
+					action="signIn.mc" method="post">
 					<div class="form-group">
 						<label for="id" class="col-sm-2">아이디</label>
 						<div class="col-sm-10">
@@ -30,7 +30,7 @@
 					<div class="form-group">
 						<label for="pass" class="col-sm-2">패스워드</label>
 						<div class="col-sm-10">
-							<input type="password" class="form-control" name="pass" id="name">
+							<input type="password" class="form-control" name="password" id="password">
 						</div>
 					</div>
 
@@ -38,8 +38,8 @@
 						<div class="col-sm-12">
 							<div class="text-center">
 								<input type="submit" value="로그인" class="btn btn-success">
-								<input type="reset" value="취소" class="btn btn-danger">
-								<button type="button" onclick="location.href='signUp.mc'">회원 가입</button>
+								<input type="reset" value="취소" class="btn btn-danger" onclick="location.href='reset.mc'">
+								<button type="button" onclick="location.href='signUpView.mc'">회원 가입</button>
 							</div>
 						</div>
 					</div>

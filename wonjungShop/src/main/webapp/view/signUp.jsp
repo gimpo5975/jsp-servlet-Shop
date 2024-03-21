@@ -44,8 +44,7 @@
 
 							<tr>
 								<th>이름</th>
-								<td><input type="text" class="form-control"
-									name="name"></td>
+								<td><input type="text" class="form-control" name="name"></td>
 							</tr>
 							<tr>
 								<th>이메일</th>
@@ -92,23 +91,24 @@
 							</tr>
 							<tr>
 								<th>성별</th>
-								<td><input type="radio" class="form-control" name="gender" value="남">남
-									<input type="radio" class="form-control" name="gender" value="여">여
-
-								</td>
+								<td><input type="radio" class="form-control" name="gender"
+									value="남">남 <input type="radio" class="form-control"
+									name="gender" value="여">여</td>
 							</tr>
 							<tr>
 								<th>국적</th>
 								<td><input type="radio" class="form-control"
-									name="countrySelect" value="외국인">외국인 <input type="radio"
-									class="form-control" name="countrySelect" value="내국인">내국인</td>
+									name="countrySelect" value="외국인">외국인 <input
+									type="radio" class="form-control" name="countrySelect"
+									value="내국인">내국인</td>
 							</tr>
 
 
 							<tr>
 								<td colspan="2" class="text-center"><input type="submit"
 									class="btn btn-primary" value="회원가입"> <input
-									type="reset" class="btn btn-danger" value="취소"></td>
+									type="button" class="btn btn-danger"
+									onclick="location.href='reset.mc'" value="취소"></td>
 							</tr>
 
 

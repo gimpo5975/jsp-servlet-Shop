@@ -1,0 +1,41 @@
+@charset "UTF-8";
+.maincontent{
+    width: 1150px;
+    height: 600px;
+    margin: 40px auto;
+}
+
+.editMember{
+    width: 700px;
+    height: 550px;
+    margin: 15px auto;
+}
+.editMember table{
+    width: 700px;
+}
+.editMember td{
+    width: 150px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+}
+.editMember td:last-child{
+    width: 300px;
+}
+.editMember input{
+    width: 250px;
+    height: 30px;
+    text-align: center;
+    font-size: 17px;
+}
+.editMember select{
+    width: 150px;
+    height: 35px;
+    text-align: center;
+}
+.editMember button{
+    width: 120px;
+    height: 30px;
+    margin-left: 10px;
+    color: #007bff;
+}

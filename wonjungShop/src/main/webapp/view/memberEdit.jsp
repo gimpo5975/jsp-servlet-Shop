@@ -8,11 +8,12 @@
 <title>Insert title here</title>
 <link href="./css/reset.css" rel="stylesheet" />
 <link rel="stylesheet" href="./css/index.css" />
+<link rel="stylesheet" href="./css/memberEdit.css" />
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 	integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-<script type="text/javascript" src="./js/accordion.js"></script>
+
 </head>
 
 <body>
@@ -31,9 +32,8 @@
 				<ul>
 					<li><a href="reset.mc"> <i class="fa-solid fa-store fa-lg"></i>&nbsp;&nbsp;
 					</a></li>
-					<li><a href="logout.mc"> <i
-							class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;로그아웃
-					</a></li>
+					<li><a href="logout.mc"><i
+							class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;로그아웃</a></li>
 				</ul>
 				<!--end of topNav-->
 			</div>
@@ -56,8 +56,7 @@
 				<!-- 상품 관리 -->
 				<li>
 					<div class="accordion-header" onclick="ToggleAccordion(this)">
-						<a href="./productManagement.html">상품 관리</a>
-					</div> <!--display:none-->
+						상품 관리</div> <!--display:none-->
 					<div class="accordion-content">
 						<p>
 							<a href="./productManagement.html">상품 목록</a>
@@ -91,71 +90,59 @@
 		<div class="main">
 			<!--maincontent-->
 			<div class="maincontent">
-				<h3>관리자 메인</h3>
-				<hr />
-				<!-- 신규 가입 회원-->
-				<h4>신규 가입 회원</h4>
-				<br /> 이 부분은 jsp으로 구현해야 하는데 일단 보여주기는 해야 하니까 그냥 테이블로 만들었습니다.
-				<table style="width: 500px; height: 100px; text-align: center;">
-					<tr>
-						<th>이름</th>
-						<th>ID</th>
-						<th>전화번호</th>
-						<th>가입일</th>
-						<th>등급</th>
-					</tr>
-					<tr>
-						<td>이름1</td>
-						<td>ID1</td>
-						<td>전화번호1</td>
-						<td>가입일1</td>
-						<td>등급1</td>
-					</tr>
-					<tr>
-						<td>이름2</td>
-						<td>ID2</td>
-						<td>전화번호2</td>
-						<td>가입일2</td>
-						<td>등급2</td>
-					</tr>
-					<tr>
-						<td>이름3</td>
-						<td>ID3</td>
-						<td>전화번호3</td>
-						<td>가입일3</td>
-						<td>등급3</td>
-					</tr>
-				</table>
-				<hr class="lasthr" />
-				<!-- 최근 게시물 목록-->
-				<h4>최근 게시물 목록</h4>
-				<br /> 이 부분은 jsp으로 구현해야 하는데 일단 보여주기는 해야 하니까 그냥 테이블로 만들었습니다.
-				<table style="width: 500px; height: 100px; text-align: center;">
-					<tr>
-						<th>게시판</th>
-						<th>제목</th>
-						<th>ID</th>
-						<th>작성일자</th>
-					</tr>
-					<tr>
-						<td>게시판</td>
-						<td>제목</td>
-						<td>ID</td>
-						<td>작성일자</td>
-					</tr>
-					<tr>
-						<td>게시판</td>
-						<td>제목</td>
-						<td>ID</td>
-						<td>작성일자</td>
-					</tr>
-					<tr>
-						<td>게시판</td>
-						<td>제목</td>
-						<td>ID</td>
-						<td>작성일자</td>
-					</tr>
-				</table>
+				<h3>회원정보 수정</h3>
+				<hr>
+				<div class="editMember">
+					<form action="memberEdit.mc">
+						<table class="editTable">
+							<tr>
+								<td>이름</td>
+								<td><input type="text" name="name"
+									value="${member.getName() }" readonly></td>
+							</tr>
+							<tr>
+								<td>아이디</td>
+								<td><input type="text" name="id" value="${member.getId() }"
+									readonly></td>
+							</tr>
+							<tr>
+								<td>전화번호</td>
+								<td><input type="text" name="phone"
+									value="${member.getPhone() }" readonly></td>
+							</tr>
+							<tr>
+								<td>가입일</td>
+								<td><input type="text" name="date"
+									value="${member.getDate() }" readonly></td>
+							</tr>
+							<tr>
+								<td>등급</td>
+								<td><select name="grade">
+										<option value="${member.getGrade() }">${member.getGrade() }</option>
+										<option value="브론즈">브론즈</option>
+										<option value="실버">실버</option>
+										<option value="골드">골드</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td>권한</td>
+								<td><select name="role">
+										<option value="${member.getRole() }">${member.getRole() }</option>
+										<option value="일반회원">일반회원</option>
+										<option value="블랙회원">블랙회원</option>
+										<option value="관리자">관리자</option>
+								</select></td>
+							</tr>
+							<tr>
+								<td colspan="2">
+									<button type="submit">수정</button>
+									<button type="button" onclick="location.href='memberInfo.mc'">취소</button>
+								</td>
+							</tr>
+						</table>
+					</form>
+
+				</div>
 			</div>
 			<!-- end of maincontent-->
 		</div>
@@ -169,5 +156,16 @@
 	</div>
 	<!-- end of container -->
 
+	<!-- 아코디언 js 코드 -->
+	<script>
+		function ToggleAccordion(sideMenu) {
+			var content = sideMenu.nextElementSibling;
+			if (content.style.display === "block") {
+				content.style.display = "none";
+			} else {
+				content.style.display = "block";
+			}
+		}
+	</script>
 </body>
 </html>
