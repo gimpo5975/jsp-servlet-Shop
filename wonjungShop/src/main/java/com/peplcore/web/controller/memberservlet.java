@@ -75,6 +75,10 @@ public class memberservlet extends HttpServlet {
 		case "/memberDelete.mc":
 			memberDelete(request, response);
 			break;
+		case "/memberDuplicateCheck.mc":
+			memberDuplicateCheck(request, response);
+			break;
+
 		case "/logout.mc":
 			logout(request, response);
 			break;
@@ -125,24 +129,71 @@ public class memberservlet extends HttpServlet {
 		// 상세주소 받아서 저장
 		String address2 = request.getParameter("address2");
 
-		member.setId(request.getParameter("id"));
-		member.setPassword(request.getParameter("pass1"));
-		member.setName(request.getParameter("name"));
-		member.setPhone(request.getParameter("phone"));
-		member.setSsn(request.getParameter("ssn"));
-		member.setEmail(request.getParameter("email"));
-		member.setZipCode(request.getParameter("zipcode"));
-		member.setAddress(address1 + address2);// 주소와 상세주소 합침
-		member.setNewsAgency(request.getParameter("newsAgency"));
-		member.setGender(request.getParameter("gender"));
-		member.setCountrySelect(request.getParameter("countrySelect"));
+		String address = address1 + address2;
+		String id = request.getParameter("id");
+		String pass1 = request.getParameter("pass1");
+		String pass2 = request.getParameter("pass2");
+		String pass = pass1 + pass2;
+		String name = request.getParameter("name");
+		String phone = request.getParameter("phone");
+		String email = request.getParameter("email");
+		String ssn = request.getParameter("ssn");
+		String zipCode = request.getParameter("zipcode");
+		String newsAgency = request.getParameter("newsAgency");
+		String gender = request.getParameter("gender");
+		String countrySelect = request.getParameter("countrySelect");
+
+		// 유효성 체크
+		if (id == null || id.equals("") || pass1 == null || pass1.equals("") || pass2 == null
+				|| pass2.equals("") || name == null || name.equals("") || phone == null || phone.equals("")
+				|| address == null || address.equals("")|| zipCode == null || zipCode.equals("")|| ssn == null || ssn.equals("")) {
+
+			request.getSession().setAttribute("messageType", "오류 메세지");
+			request.getSession().setAttribute("messageContent", "정보를 올바르게 입력해 주세요");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/signUpView.mc");
+			dispatcher.forward(request, response);
+			return;
+		} // end of if
+
+		// 비밀번호 체크
+		if (!pass1.equals(pass2)) {
+			request.getSession().setAttribute("messageType", "오류 메세지");
+			request.getSession().setAttribute("messageContent", "비밀번호가 일치하지 않습니다.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/signUpView.mc");
+			dispatcher.forward(request, response);
+			return;
+		} // end of if
+
+		member.setId(id);
+		member.setPassword(pass);
+		member.setName(name);
+		member.setPhone(phone);
+		member.setSsn(ssn);
+		member.setEmail(email);
+		member.setZipCode(zipCode);
+		member.setAddress(address);// 주소와 상세주소 합침
+		member.setNewsAgency(newsAgency);
+		member.setGender(gender);
+		member.setCountrySelect(countrySelect);
 
 		MemberDAO dao = new MemberDAO();
-		dao.insertMember(member);
 
-		// 회원가입 후 메인페이지로 이동
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/");
-		dispatcher.forward(request, response);
+		int result = dao.insertMember(member);
+		
+		//회원가입 완료
+		if(result == 1) {
+			request.getSession().setAttribute("messageType", "입력 성공 메세지");
+			request.getSession().setAttribute("messageContent", "회원가입 완료");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+			dispatcher.forward(request, response);
+		}
+		//회원가입 실패
+		else {
+			request.getSession().setAttribute("messageType", "입력 오류 메세지");
+			request.getSession().setAttribute("messageContent", "이미 존재하는 회원입니다.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+			dispatcher.forward(request, response);
+		}//end of if
 
 	}// end of insertMember
 
@@ -151,17 +202,17 @@ public class memberservlet extends HttpServlet {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
 		String saveId = request.getParameter("saveId");
-		
+
 		MemberDAO dao = new MemberDAO();
 		MemberDTO member = dao.getOneMemberList(id);
 
 		if (member != null && password.equals(member.getPassword())) {
-			
-			if(saveId != null) {
-				Cookie cookie = new Cookie("id",id);
+
+			if (saveId != null) {
+				Cookie cookie = new Cookie("id", id);
 				response.addCookie(cookie);
-			}//end of if-in
-			
+			} // end of if-in
+
 			HttpSession session = request.getSession();
 			session.setAttribute("member", member);
 
@@ -178,9 +229,8 @@ public class memberservlet extends HttpServlet {
 			} // end of if-in
 
 		} else {
-			String signInCheck = " 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\r\n"
-					+ "입력하신 내용을 다시 확인해주세요.";
-			request.setAttribute("signInCheck",signInCheck);
+			String signInCheck = " 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\r\n" + "입력하신 내용을 다시 확인해주세요.";
+			request.setAttribute("signInCheck", signInCheck);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/view/signIn.jsp");
 			dispatcher.forward(request, response);
 		} // end of if
@@ -280,4 +330,16 @@ public class memberservlet extends HttpServlet {
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/");
 		dispatcher.forward(request, response);
 	}// end of logout
+
+	// 아이디 중복체크 메소드
+	public void memberDuplicateCheck(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		System.out.println("아이디 중복 체크");
+		String id = request.getParameter("id");
+		MemberDAO member = new MemberDAO();
+
+		response.getWriter().write(String.valueOf(member.duplicateCheck(id)));// 정수형으로 받아온 값을 문자형으로 변환
+
+	}// end of memberDuplicateCheck
+
 }// end of class

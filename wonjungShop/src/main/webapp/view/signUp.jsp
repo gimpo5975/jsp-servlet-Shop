@@ -13,6 +13,8 @@
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script type="text/javascript" src="./js/address.js"></script>
+<script type="text/javascript" src="./js/idPassCheck.js"></script>
+
 </head>
 <body>
 	<div class="container marketing" id="marketing2">
@@ -28,7 +30,7 @@
 							<tr>
 								<th>아이디</th>
 								<td style="display: flex"><input type="text"
-									class="form-control col-md-6" name="id" placeholder="id를 넣으세요">
+									class="form-control col-md-6" name="id" id="id" placeholder="id를 넣으세요">
 									<button type="button" class="btn" id="overlapCheck"
 										onclick="registerFunction()">중복체크</button> <br> <span
 									id="idText"></span></td>
@@ -36,13 +38,13 @@
 							<tr>
 								<th>패스워드</th>
 								<td><input type="password" class="form-control"
-									name="pass1" placeholder="비밀번호 입력"></td>
+									name="pass1" id="pass1" placeholder="비밀번호 입력"></td>
 							</tr>
 
 							<tr>
 								<th>패스워드확인</th>
 								<td><input type="password" class="form-control"
-									name="pass2"></td>
+									name="pass2" id="pass2" onkeyup="passwordCheckFunction()"><br> <span id="passwordText"></span></td>
 							</tr>
 
 							<tr>
@@ -123,5 +125,28 @@
 
 		</div>
 	</div>
+	<%
+	String messageContent = null;
+	String messageType = null;
+
+	if (session.getAttribute("messageContent") != null) {
+		messageContent = (String) session.getAttribute("messageContent");
+	}
+	if (session.getAttribute("messageType") != null) {
+		messageType = (String) session.getAttribute("messageType");
+
+	}
+
+	if (messageContent != null) {
+	%>
+
+	<h3><%=messageType%></h3>
+	<h3><%=messageContent%></h3>
+
+	<%
+	session.removeAttribute("messageType");
+	session.removeAttribute("messageContent");
+	}
+	%>
 </body>
 </html>

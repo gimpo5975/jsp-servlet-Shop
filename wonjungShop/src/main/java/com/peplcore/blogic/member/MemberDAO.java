@@ -63,7 +63,7 @@ public class MemberDAO {
 	}// end of getOneMember
 
 	// 회원가입 메소드
-	public void insertMember(MemberDTO member) {
+	public int insertMember(MemberDTO member) {
 
 		try {
 			con = MyDBConnection.getConnection();// database연결
@@ -82,15 +82,19 @@ public class MemberDAO {
 			pstmt.setString(10, member.getCountrySelect());
 
 			// 쿼리문 실행
-			pstmt.executeUpdate();
+			int result = pstmt.executeUpdate();// 쿼리문 실행 => 성공하면 1을 반환(1= 쿼리문 성공한 개수)
+			// 환값이 1인 경우는 대개 해당 쿼리가 성공적으로 실행되어 데이터베이스에 영향을 준 행이 한 개일
+			// 때입니다. 이는 데이터베이스 작업이 성공했다는 것을 의미합니다.
 
+			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();// 플젝 완성후 지움
 			System.out.println("insertMember에러");
 		} finally {
 			MyDBConnection.close(rs, pstmt, con);
 		} // end of try-catch
-
+			// 위에서 문제가있어 1을 반환하지 못하고 여기까지 내려오면 -1을 리턴
+		return -1;
 	}// end of insertMember
 
 	// 회원 목록을 가져오는 메소드
@@ -228,5 +232,26 @@ public class MemberDAO {
 
 		return count;
 	}// end of allUserCount
+
+	// 아이디 중복체크하는 메소드
+	public int duplicateCheck(String id) {
+		try {
+			con = MyDBConnection.getConnection();
+			pstmt = con.prepareStatement(USER_GET);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+
+			if (rs.next() || id.equals("")) {
+				return 0;// 이미 회원이 존재한다. 아이디가 있다.
+			} else {
+				return 1;// 가입가능한 회원 아이디
+			} // end of if
+
+		} catch (SQLException e) {
+		} finally {
+			MyDBConnection.close(rs, pstmt, con);
+		} // end of try-catch
+		return -1;// 데이터 베이스 오루 알려주기
+	}// end of registerCheck
 
 }// end of class
