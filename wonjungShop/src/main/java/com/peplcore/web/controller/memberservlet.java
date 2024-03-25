@@ -1,7 +1,6 @@
 package com.peplcore.web.controller;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +8,7 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -150,11 +150,18 @@ public class memberservlet extends HttpServlet {
 	public void signIn(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-
+		String saveId = request.getParameter("saveId");
+		
 		MemberDAO dao = new MemberDAO();
 		MemberDTO member = dao.getOneMemberList(id);
 
 		if (member != null && password.equals(member.getPassword())) {
+			
+			if(saveId != null) {
+				Cookie cookie = new Cookie("id",id);
+				response.addCookie(cookie);
+			}//end of if-in
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("member", member);
 
@@ -171,7 +178,9 @@ public class memberservlet extends HttpServlet {
 			} // end of if-in
 
 		} else {
-
+			String signInCheck = " 아이디(로그인 전용 아이디) 또는 비밀번호를 잘못 입력했습니다.\r\n"
+					+ "입력하신 내용을 다시 확인해주세요.";
+			request.setAttribute("signInCheck",signInCheck);
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/view/signIn.jsp");
 			dispatcher.forward(request, response);
 		} // end of if

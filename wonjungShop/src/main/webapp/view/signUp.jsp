@@ -27,8 +27,11 @@
 						<table class="table table-boardered">
 							<tr>
 								<th>아이디</th>
-								<td><input type="text" class="form-control" name="id"
-									placeholder="id를 넣으세요"></td>
+								<td style="display: flex"><input type="text"
+									class="form-control col-md-6" name="id" placeholder="id를 넣으세요">
+									<button type="button" class="btn" id="overlapCheck"
+										onclick="registerFunction()">중복체크</button> <br> <span
+									id="idText"></span></td>
 							</tr>
 							<tr>
 								<th>패스워드</th>
